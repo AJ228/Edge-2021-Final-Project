@@ -22,16 +22,19 @@ class Player():
         return(self.__Score)
 
     def SetRPS(self):
-        Rps = ["Rock","Paper","Scissors"]
-        self.__Rps = random.choice(Rps)
+        self.__Rps = input("Enter RPS choice: ")
+        self.__Rps = self.__Rps.title()
 
     def GetRPS(self):
         return(self.__Rps)
     
-
 class Computer(Player):
     def __init__(self,name):
         Player.__init__(self,name)
+
+    def SetCRPS(self):
+        Rps = ["Rock","Paper","Scissors"]
+        self.__Rps = random.choice(Rps)
 
 #Deciding turns with RPS - tested and works
 def PlayRPS(Player,Computer):
@@ -39,7 +42,7 @@ def PlayRPS(Player,Computer):
     Winner = ""
     while Winner != ("Player" or "Computer"):
         Player.SetRPS() #Rps = rock-paper-scissors
-        Computer.SetRPS()
+        Computer.SetCRPS()
         PRPS = Player.GetRPS()
         CRPS = Computer.GetRPS()
         print(Player.GetName(),"got: ",PRPS)
@@ -47,7 +50,7 @@ def PlayRPS(Player,Computer):
 
         while PRPS == CRPS:
             Player.SetRPS()
-            Computer.SetRPS()
+            Computer.SetCRPS()
             PRPS = Player.GetRPS()
             CRPS = Computer.GetRPS()
             print(Player.GetName(),"got: ",PRPS) #testing purposes
@@ -100,10 +103,10 @@ SafeLot = [0,0,2,2,2,2,2,2,2,4,4,4,5,5,5,5,6,6,8,8,10] #high chance to get mid-r
 RiskLot = [-10,-8,-6,-4,-4,-4,-4,-4,-2,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,4,4,4,4,4,8,8,8,8,8,15,15,15,15,15,20,20,25] #more chances to lose more points but cahnces to gain more too
 GoBigOrGoHomeLot = [-50,-25,25,-10,-10,-10,-10,-10,-10,-10,0,0,0,10,10,10,10,10,10,10,20,20,20,20,20,20,20,20,40,40,40,40,40,50,60,80] #more chances to lose more points than RiskLot but max. point reward is higher
 
-#while GameOver == False:
+while GameOver == False:
+    TurnStarter = PlayRPS(Human,Comp)
+    if TurnStarter == Human:
+        print(Human.GetName(),"won so they go first")
 
-TurnStarter = PlayRPS(Human,Comp)
-if TurnStarter == Human:
-    print(Human.GetName(),"won so they go first")
-else:
-     print(Comp.GetName(),"won so they go first")   
+    else:
+        print(Comp.GetName(),"won so they go first")  
