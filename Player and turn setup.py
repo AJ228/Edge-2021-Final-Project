@@ -32,7 +32,8 @@ class Player():
 class Computer(Player):
     def __init__(self,name):
         Player.__init__(self,name)
-    
+
+#Test codes    
 PName = input("Enter player name: ")
 PName = PName.title()
 CName = input("Enter CPU name: ")
@@ -40,7 +41,6 @@ CName = CName.title()
 CName = CName + "(CPU)"
 CID = CName[-4:-1]
 
-#Test codes
 Human = Player(PName)
 Comp = Computer(CName)
 
