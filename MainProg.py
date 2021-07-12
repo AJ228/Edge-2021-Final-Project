@@ -36,15 +36,18 @@ class Computer(Player):
         Rps = ["Rock","Paper","Scissors"]
         self.__Rps = random.choice(Rps)
 
-#Deciding turns with RPS - tested and works
+    def GetCRPS(self):
+        return (self.__Rps)
+
+#Deciding turns with RPS - tested and mostly works
 def PlayRPS(Player,Computer):
     First = ""
     Winner = ""
     while Winner != ("Player" or "Computer"):
         Player.SetRPS() #Rps = rock-paper-scissors
-        Computer.SetCRPS()
+        Computer.SetCRPS() #this doesn't run how I want it to
         PRPS = Player.GetRPS()
-        CRPS = Computer.GetRPS()
+        CRPS = Computer.GetCRPS()
         print(Player.GetName(),"got: ",PRPS)
         print(Computer.GetName(),"got: ",CRPS)
 
@@ -52,7 +55,7 @@ def PlayRPS(Player,Computer):
             Player.SetRPS()
             Computer.SetCRPS()
             PRPS = Player.GetRPS()
-            CRPS = Computer.GetRPS()
+            CRPS = Computer.GetCRPS()
             print(Player.GetName(),"got: ",PRPS) #testing purposes
             print(Computer.GetName(),"got: ",CRPS)
 
@@ -103,10 +106,10 @@ SafeLot = [0,0,2,2,2,2,2,2,2,4,4,4,5,5,5,5,6,6,8,8,10] #high chance to get mid-r
 RiskLot = [-10,-8,-6,-4,-4,-4,-4,-4,-2,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,4,4,4,4,4,8,8,8,8,8,15,15,15,15,15,20,20,25] #more chances to lose more points but cahnces to gain more too
 GoBigOrGoHomeLot = [-50,-25,25,-10,-10,-10,-10,-10,-10,-10,0,0,0,10,10,10,10,10,10,10,20,20,20,20,20,20,20,20,40,40,40,40,40,50,60,80] #more chances to lose more points than RiskLot but max. point reward is higher
 
-while GameOver == False:
-    TurnStarter = PlayRPS(Human,Comp)
-    if TurnStarter == Human:
-        print(Human.GetName(),"won so they go first")
+#while GameOver == False:
+TurnStarter = PlayRPS(Human,Comp)
+if TurnStarter == Human:
+    print(Human.GetName(),"won so they go first")
 
-    else:
-        print(Comp.GetName(),"won so they go first")  
+else:
+    print(Comp.GetName(),"won so they go first")  
