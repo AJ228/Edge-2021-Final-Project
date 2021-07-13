@@ -27,7 +27,12 @@ class Player():
 
     def GetRPS(self):
         return(self.__Rps)
-    
+
+    def AddToScoreFile(self):
+        ScoreFile = open("RawScores.txt","a")
+        ScoreFile.write(self.__Name + "-" + str(self.__Turns) + "-" + str(self.__Score) + "\n")
+        ScoreFile.close()
+
 class Computer(Player):
     def __init__(self,name):
         Player.__init__(self,name)
@@ -199,12 +204,14 @@ while GameOver == False:
     print("End of turn score for ",Human.GetName(),": ",Human.GetScore())
     print("End of turn score for ",Comp.GetName(),": ",Comp.GetScore())
 
-    #Check if game's over to exit while loop
+    #Check if game's over to exit while loop + adding winner data to raw score file
     if ((Human.GetScore() >= Goal) and (Human.GetScore() > Comp.GetScore())):
         print(Human.GetName()," won in ",Human.GetTurns(),"turns! Good job!")
+        Human.AddToScoreFile()
         GameOver = True
 
     elif ((Comp.GetScore() >= Goal) and (Comp.GetScore() > Human.GetScore())):
         print(Comp.GetName()," won in ",Comp.GetTurns(),"turns! Good job (I guess)!")
         print("Better luck next time ",Human.GetName()," :)")
+        Comp.AddToScoreFile()
         GameOver = True
