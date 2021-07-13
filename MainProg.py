@@ -228,3 +228,5 @@ while GameOver == False:
         Comp.AddToScoreFile()
         GameOver = True
 
+
+
