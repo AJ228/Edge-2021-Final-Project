@@ -57,14 +57,18 @@ def PlayRPS(Player,Computer):
         CRPS = Computer.GetCRPS()
         print(Player.GetName(),"got: ",PRPS)
         print(Computer.GetName(),"got: ",CRPS)
+        
+        print("\n") #presentation purposes
 
         while PRPS == CRPS:
+            print(Player.GetName(),"and",Computer.GetName(),"drew so we'll go again\n")
             Player.SetRPS()
             Computer.SetCRPS()
             PRPS = Player.GetRPS()
             CRPS = Computer.GetCRPS()
             print(Player.GetName(),"got: ",PRPS) #testing purposes
             print(Computer.GetName(),"got: ",CRPS)
+            print("\n") #presentation purposes
 
         if ((PRPS == "Rock") and (CRPS == "Scissors")):
             PWin = True
@@ -137,6 +141,8 @@ while GameOver == False:
             print("Points gained: ",Points)
             Human.UpdateScore(Points)
 
+        print("\n") #presentation purposes
+
         print("Computer's turn")
         LotChoice = random.randint(0,2)
         print(Comp.GetName(),"chose: ",LotList[LotChoice])
@@ -156,6 +162,8 @@ while GameOver == False:
             Points = random.choice(GoBigOrGoHomeLot)
             print("Points gained: ",Points)
             Comp.UpdateScore(Points)
+        
+        print("\n") #presentation purposes
 
     elif TurnStarter == Comp:
         print(Comp.GetName(),"won so they go first")
@@ -178,6 +186,8 @@ while GameOver == False:
             print("Points gained: ",Points)
             Comp.UpdateScore(Points)
 
+        print("\n") #presentation purposes
+
         print("Your turn")
         LotChoice = int(input("Choose your point lot (1,2,3): "))
         if LotChoice == 1:
@@ -195,14 +205,16 @@ while GameOver == False:
         else:
             print("Chosen lot: ",LotList[LotChoice-1])
             Points = random.choice(GoBigOrGoHomeLot)
-            print("Points gained: ",Points)
+            print("Points gained: ",Points,) 
             Human.UpdateScore(Points)
+        
+        print("\n") #presentation purposes
 
     Human.UpdateTurns()
     Comp.UpdateTurns()
 
     print("End of turn score for ",Human.GetName(),": ",Human.GetScore())
-    print("End of turn score for ",Comp.GetName(),": ",Comp.GetScore())
+    print("End of turn score for ",Comp.GetName(),": ",Comp.GetScore(),"\n") #presentation purposes
 
     #Check if game's over to exit while loop + adding winner data to raw score file
     if ((Human.GetScore() >= Goal) and (Human.GetScore() > Comp.GetScore())):
@@ -215,3 +227,4 @@ while GameOver == False:
         print("Better luck next time ",Human.GetName()," :)")
         Comp.AddToScoreFile()
         GameOver = True
+
