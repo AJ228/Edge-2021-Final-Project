@@ -95,138 +95,237 @@ def PlayRPS(Player,Computer):
 
     return(First)       
 
-#Setting up players each game - completed and works
-PName = input("Enter player name: ")
-PName = PName.title()
-CName = input("Enter CPU name: ")
-CName = CName.title()
-CName = CName + "(CPU)"
+#Menu to decide between playing the game, reading raw score data and reading special wall
+Menu = "1. Play the game\n2. Read previous winnners' raw score data\n3. Read the 'Special Wall'"
+print(Menu)
+Choice = int(input("Enter your choice (0 to exit): "))
 
-Human = Player(PName)
-Comp = Computer(CName)
+while Choice != 0:
+    if Choice == 1:
+        #Setting up players each game - completed and works
+        PName = input("Enter player name: ")
+        PName = PName.title()
+        CName = input("Enter CPU name: ")
+        CName = CName.title()
+        CName = CName + "(CPU)"
 
-#Playing the game - completed and works properly after testing
+        Human = Player(PName)
+        Comp = Computer(CName)
 
-Goal = 50 #setting goal score (test with 20)
-PScore = 0 #player scores to test game
-CScore = 0
-GameOver = False
+        #Playing the game - completed and works properly after testing
 
-#Making the point lots
-SafeLot = [0,0,2,2,2,2,2,2,2,4,4,4,5,5,5,5,6,6,8,8,10] #high chance to get mid-range (which is still small)
-RiskLot = [-10,-8,-6,-4,-4,-4,-4,-4,-2,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,4,4,4,4,4,8,8,8,8,8,15,15,15,15,15,20,20,25] #more chances to lose more points but cahnces to gain more too
-GoBigOrGoHomeLot = [-50,-25,25,-10,-10,-10,-10,-10,-10,-10,0,0,0,10,10,10,10,10,10,10,20,20,20,20,20,20,20,20,40,40,40,40,40,50,60,80] #more chances to lose more points than RiskLot but max. point reward is higher
+        Goal = 50 #setting goal score (test with 20)
+        PScore = 0 #player scores to test game
+        CScore = 0
+        GameOver = False
 
-while GameOver == False:
-    TurnStarter = PlayRPS(Human,Comp)
-    LotList = ["Safe","Risky","Go Big or Go Home"]
-    if TurnStarter == Human:
-        print(Human.GetName(),"won so they go first")
-        LotChoice = int(input("Choose your point lot (1,2,3): "))
-        if LotChoice == 1:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(SafeLot)
-            print("Points gained: ",Points)
-            Human.UpdateScore(Points)
+        #Making the point lots
+        SafeLot = [0,0,2,2,2,2,2,2,2,4,4,4,5,5,5,5,6,6,8,8,10] #high chance to get mid-range (which is still small)
+        RiskLot = [-10,-8,-6,-4,-4,-4,-4,-4,-2,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,4,4,4,4,4,8,8,8,8,8,15,15,15,15,15,20,20,25] #more chances to lose more points but cahnces to gain more too
+        GoBigOrGoHomeLot = [-50,-25,25,-10,-10,-10,-10,-10,-10,-10,0,0,0,10,10,10,10,10,10,10,20,20,20,20,20,20,20,20,40,40,40,40,40,50,60,80] #more chances to lose more points than RiskLot but max. point reward is higher
 
-        elif LotChoice == 2:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(RiskLot)
-            print("Points gained: ",Points)
-            Human.UpdateScore(Points)
+        while GameOver == False:
+            TurnStarter = PlayRPS(Human,Comp)
+            LotList = ["Safe","Risky","Go Big or Go Home"]
+            if TurnStarter == Human:
+                print(Human.GetName(),"won so they go first")
+                LotChoice = int(input("Choose your point lot (1,2,3): "))
+                if LotChoice == 1:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(SafeLot)
+                    print("Points gained: ",Points)
+                    Human.UpdateScore(Points)
 
-        else:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(GoBigOrGoHomeLot)
-            print("Points gained: ",Points)
-            Human.UpdateScore(Points)
+                elif LotChoice == 2:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(RiskLot)
+                    print("Points gained: ",Points)
+                    Human.UpdateScore(Points)
 
-        print("\n") #presentation purposes
+                else:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(GoBigOrGoHomeLot)
+                    print("Points gained: ",Points)
+                    Human.UpdateScore(Points)
 
-        print("Computer's turn")
-        LotChoice = random.randint(0,2)
-        print(Comp.GetName(),"chose: ",LotList[LotChoice])
-        LotChoice = LotChoice + 1
+                print("\n") #presentation purposes
 
-        if LotChoice == 1:
-            Points = random.choice(SafeLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
+                print("Computer's turn")
+                LotChoice = random.randint(0,2)
+                print(Comp.GetName(),"chose: ",LotList[LotChoice])
+                LotChoice = LotChoice + 1
 
-        elif LotChoice == 2:
-            Points = random.choice(RiskLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
+                if LotChoice == 1:
+                    Points = random.choice(SafeLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
 
-        else:
-            Points = random.choice(GoBigOrGoHomeLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
-        
-        print("\n") #presentation purposes
+                elif LotChoice == 2:
+                    Points = random.choice(RiskLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
 
-    elif TurnStarter == Comp:
-        print(Comp.GetName(),"won so they go first")
-        LotChoice = random.randint(0,2)
-        print(Comp.GetName(),"chose: ",LotList[LotChoice])
-        LotChoice = LotChoice + 1
+                else:
+                    Points = random.choice(GoBigOrGoHomeLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
+                
+                print("\n") #presentation purposes
 
-        if LotChoice == 1:
-            Points = random.choice(SafeLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
+            elif TurnStarter == Comp:
+                print(Comp.GetName(),"won so they go first")
+                LotChoice = random.randint(0,2)
+                print(Comp.GetName(),"chose: ",LotList[LotChoice])
+                LotChoice = LotChoice + 1
 
-        elif LotChoice == 2:
-            Points = random.choice(RiskLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
+                if LotChoice == 1:
+                    Points = random.choice(SafeLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
 
-        else:
-            Points = random.choice(GoBigOrGoHomeLot)
-            print("Points gained: ",Points)
-            Comp.UpdateScore(Points)
+                elif LotChoice == 2:
+                    Points = random.choice(RiskLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
 
-        print("\n") #presentation purposes
+                else:
+                    Points = random.choice(GoBigOrGoHomeLot)
+                    print("Points gained: ",Points)
+                    Comp.UpdateScore(Points)
 
-        print("Your turn")
-        LotChoice = int(input("Choose your point lot (1,2,3): "))
-        if LotChoice == 1:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(SafeLot)
-            print("Points gained: ",Points)
-            Human.UpdateScore(Points)
+                print("\n") #presentation purposes
 
-        elif LotChoice == 2:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(RiskLot)
-            print("Points gained: ",Points)
-            Human.UpdateScore(Points)
+                print("Your turn")
+                LotChoice = int(input("Choose your point lot (1,2,3): "))
+                if LotChoice == 1:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(SafeLot)
+                    print("Points gained: ",Points)
+                    Human.UpdateScore(Points)
 
-        else:
-            print("Chosen lot: ",LotList[LotChoice-1])
-            Points = random.choice(GoBigOrGoHomeLot)
-            print("Points gained: ",Points,) 
-            Human.UpdateScore(Points)
-        
-        print("\n") #presentation purposes
+                elif LotChoice == 2:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(RiskLot)
+                    print("Points gained: ",Points)
+                    Human.UpdateScore(Points)
 
-    Human.UpdateTurns()
-    Comp.UpdateTurns()
+                else:
+                    print("Chosen lot: ",LotList[LotChoice-1])
+                    Points = random.choice(GoBigOrGoHomeLot)
+                    print("Points gained: ",Points,) 
+                    Human.UpdateScore(Points)
+                
+                print("\n") #presentation purposes
 
-    print("End of turn score for ",Human.GetName(),": ",Human.GetScore())
-    print("End of turn score for ",Comp.GetName(),": ",Comp.GetScore(),"\n") #presentation purposes
+            Human.UpdateTurns()
+            Comp.UpdateTurns()
 
-    #Check if game's over to exit while loop + adding winner data to raw score file
-    if ((Human.GetScore() >= Goal) and (Human.GetScore() > Comp.GetScore())):
-        print(Human.GetName()," won in ",Human.GetTurns(),"turns! Good job!")
-        Human.AddToScoreFile()
-        GameOver = True
+            print("End of turn score for ",Human.GetName(),": ",Human.GetScore())
+            print("End of turn score for ",Comp.GetName(),": ",Comp.GetScore(),"\n") #presentation purposes
 
-    elif ((Comp.GetScore() >= Goal) and (Comp.GetScore() > Human.GetScore())):
-        print(Comp.GetName()," won in ",Comp.GetTurns(),"turns! Good job (I guess)!")
-        print("Better luck next time ",Human.GetName()," :)")
-        Comp.AddToScoreFile()
-        GameOver = True
+            #Check if game's over to exit while loop + adding winner data to raw score file
+            if ((Human.GetScore() >= Goal) and (Human.GetScore() > Comp.GetScore())):
+                print(Human.GetName()," won in ",Human.GetTurns(),"turns! Good job!")
+                Human.AddToScoreFile()
+                GameOver = True
 
+            elif ((Comp.GetScore() >= Goal) and (Comp.GetScore() > Human.GetScore())):
+                print(Comp.GetName()," won in ",Comp.GetTurns(),"turns! Good job (I guess)!")
+                print("Better luck next time ",Human.GetName()," :)")
+                Comp.AddToScoreFile()
+                GameOver = True
 
+        #Reading RawScores and adding to Special Wall accordingly
+
+        ScoreFile = open("RawScores.txt","r")
+
+        DataCheck = []
+
+        for line in ScoreFile:
+            SplitLine = line.split("-")
+            Name = SplitLine[0]
+            Turns = SplitLine[1]
+            Turns = int(Turns)
+            Score = SplitLine[2]
+            Score = int(Score.rstrip("\n"))
+
+            PData = []
+            PData.append(Name)
+            PData.append(Turns)
+            PData.append(Score)
+
+            DataCheck.append(PData)
+
+        ScoreFile.close()
+
+        print(DataCheck) #test functionality of reading RawScores
+
+        #Achievements for Special Wall
+        MaxScore = ["",0]
+        MaxTurns = ["",0]
+        MinTurns = ["",0]
+        ExactScore = ["",0]
+        MaxScore[0] = DataCheck[0][0]
+        MaxScore[1] = DataCheck[0][2]
+        MaxTurns[0] = DataCheck[0][0]
+        MaxTurns[1] = DataCheck[0][1]
+        MinTurns[0] = DataCheck[0][0]
+        MinTurns[1] = DataCheck[0][1]
+        ExactScore[0] = DataCheck[0][0]
+        ExactScore[1] = DataCheck[0][2]
+
+        GoalDiff1 = 50 - DataCheck[0][2]
+
+        for i in range(len(DataCheck)):
+            GoalDiff2 = 50 - DataCheck[i][2]
+
+            if DataCheck[i][2] > MaxScore[1]: #update MaxScore
+                MaxScore[0] = DataCheck[i][0]
+                MaxScore[1] = DataCheck[i][2]
+
+            elif DataCheck[i][1] > MaxTurns[1]: #update MaxTurns
+                MaxTurns[0] = DataCheck[i][0]
+                MaxTurns[1] = DataCheck[i][1]
+
+            elif DataCheck[i][1] < MinTurns[1]: #update MinTurns
+                MinTurns[0] = DataCheck[i][0]
+                MinTurns[1] = DataCheck[i][1]
+
+            elif 0 <= GoalDiff2 < GoalDiff1: #update ExactScore
+                ExactScore[0] = DataCheck[i][0]
+                ExactScore[1] = DataCheck[i][2]
+                GoalDiff1 = GoalDiff2
+
+            elif GoalDiff2 == 0:
+                ExactScore[0] = DataCheck[i][0]
+                ExactScore[1] = DataCheck[i][2]
+                GoalDiff1 = GoalDiff2
+
+        #Writing acheivements to Special Wall file
+        WallFile = open("SpecialWall.txt","w") #Could be more efficient but best I can think of for now
+        WallFile.write("'Special' ways people won their games\n\n")
+        WallFile.write("Won the Point Lottery: " + MaxScore[0] + " with " + str(MaxScore[1]) + " points\n")
+        WallFile.write("The Tortoise from 'The Hare and The Tortoise': " + MaxTurns[0] + " with " + str(MaxTurns[1]) + " turns\n")    
+        WallFile.write("I Am Speed: " + MinTurns[0] + " with " + str(MinTurns[1]) + " turns\n")
+        WallFile.write("Point Marksman: " + ExactScore[0] + " with a score of " + str(ExactScore[1]) + " points\n")
+        WallFile.close()
+
+    elif Choice == 2:
+        ScoreFile = open("RawScores.txt","r")
+
+        for line in ScoreFile:
+            print(line)
+
+        ScoreFile.close()
+
+    elif Choice == 3:
+        #Reading achievements file on terminal
+        WallFile = open("SpecialWall.txt","r")
+
+        for line in WallFile:
+            print(line)
+
+        WallFile.close()
+
+    Choice = int(input("Enter your new choice (0 to exit): "))
 
