@@ -1,0 +1,6 @@
+'Special' ways people won their games
+
+Won the Point Lottery: Rando(CPU) with 102 points
+The Tortoise from 'The Hare and The Tortoise': Randy(CPU) with 13 turns
+I Am Speed: Randy(CPU) with 3 turns
+Point Marksman: Adithya with a score of 50 points
