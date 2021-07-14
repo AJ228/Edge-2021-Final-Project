@@ -22,8 +22,13 @@ class Player():
         return(self.__Score)
 
     def SetRPS(self):
-        self.__Rps = input("Enter RPS choice: ")
-        self.__Rps = self.__Rps.title()
+        self.__Rps = input("Enter RPS choice (r = rock, p = paper, s = scissors): ")
+        if self.__Rps == 'r':
+            self.__Rps = "Rock"
+        elif self.__Rps == 'p':
+            self.__Rps = "Paper"
+        elif self.__Rps == 's':
+            self.__Rps = "Scissors"
 
     def GetRPS(self):
         return(self.__Rps)
@@ -55,8 +60,8 @@ def PlayRPS(Player,Computer):
         Computer.SetCRPS() #this doesn't run how I want it to
         PRPS = Player.GetRPS()
         CRPS = Computer.GetCRPS()
-        print(Player.GetName(),"got: ",PRPS)
-        print(Computer.GetName(),"got: ",CRPS)
+        print(Player.GetName(),"chose: ",PRPS)
+        print(Computer.GetName(),"chose: ",CRPS)
         
         print("\n") #presentation purposes
 
@@ -66,8 +71,8 @@ def PlayRPS(Player,Computer):
             Computer.SetCRPS()
             PRPS = Player.GetRPS()
             CRPS = Computer.GetCRPS()
-            print(Player.GetName(),"got: ",PRPS) #testing purposes
-            print(Computer.GetName(),"got: ",CRPS)
+            print(Player.GetName(),"chose: ",PRPS) #testing purposes
+            print(Computer.GetName(),"chose: ",CRPS)
             print("\n") #presentation purposes
 
         if ((PRPS == "Rock") and (CRPS == "Scissors")):
@@ -258,7 +263,7 @@ while Choice != 0:
 
         ScoreFile.close()
 
-        print(DataCheck) #test functionality of reading RawScores
+        #print(DataCheck) #test functionality of reading RawScores
 
         #Achievements for Special Wall
         MaxScore = ["",0]
@@ -304,10 +309,10 @@ while Choice != 0:
         #Writing acheivements to Special Wall file
         WallFile = open("SpecialWall.txt","w") #Could be more efficient but best I can think of for now
         WallFile.write("'Special' ways people won their games\n\n")
-        WallFile.write("Won the Point Lottery: " + MaxScore[0] + " with " + str(MaxScore[1]) + " points\n")
-        WallFile.write("The Tortoise from 'The Hare and The Tortoise': " + MaxTurns[0] + " with " + str(MaxTurns[1]) + " turns\n")    
-        WallFile.write("I Am Speed: " + MinTurns[0] + " with " + str(MinTurns[1]) + " turns\n")
-        WallFile.write("Point Marksman: " + ExactScore[0] + " with a score of " + str(ExactScore[1]) + " points\n")
+        WallFile.write("Won the Point Lottery (highest score): " + MaxScore[0] + " with " + str(MaxScore[1]) + " points\n")
+        WallFile.write("The Tortoise from 'The Hare and The Tortoise' (took most turns): " + MaxTurns[0] + " with " + str(MaxTurns[1]) + " turns\n")    
+        WallFile.write("I Am Speed (took fewest turns): " + MinTurns[0] + " with " + str(MinTurns[1]) + " turns\n")
+        WallFile.write("Point Marksman (closest to goal): " + ExactScore[0] + " with a score of " + str(ExactScore[1]) + " points\n")
         WallFile.close()
 
     elif Choice == 2:
