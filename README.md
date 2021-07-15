@@ -7,7 +7,7 @@ A turn-based game you play against a computer based on luck.
 
 Use rock-paper-scissors to decide who goes first in each turn.
 
-Race against the computer to be the first to gain/exceed 100 points!
+Race against the computer to be the first to gain/exceed 50 points!
 
 Progress through the game by choosing between 3 point brackets:
 1) Safe play: Yields the lowest points but cannot lose any points
